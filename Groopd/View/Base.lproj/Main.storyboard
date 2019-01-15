@@ -32,7 +32,13 @@
                             <outlet property="delegate" destination="wK0-Nf-xWJ" id="Lwo-5h-eZA"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Groopd" id="JwY-xB-BfR"/>
+                    <navigationItem key="navigationItem" title="Groopd" id="JwY-xB-BfR">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Jax-3r-PrP">
+                            <connections>
+                                <action selector="addNewGroopdButtonPressed:" destination="wK0-Nf-xWJ" id="rGE-CP-D2X"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="9y0-sA-1aP" kind="show" identifier="GoToContactsList" id="Mwl-9C-TSw"/>
                     </connections>
