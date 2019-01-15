@@ -8,22 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		8058148C21EE836100E6F889 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8058148B21EE836100E6F889 /* AppDelegate.swift */; };
-		8058148E21EE836100E6F889 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8058148D21EE836100E6F889 /* ViewController.swift */; };
+		8058148E21EE836100E6F889 /* GroopdListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8058148D21EE836100E6F889 /* GroopdListViewController.swift */; };
 		8058149121EE836100E6F889 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8058148F21EE836100E6F889 /* Main.storyboard */; };
 		8058149421EE836100E6F889 /* Groopd.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8058149221EE836100E6F889 /* Groopd.xcdatamodeld */; };
 		8058149621EE836200E6F889 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8058149521EE836200E6F889 /* Assets.xcassets */; };
 		8058149921EE836200E6F889 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8058149721EE836200E6F889 /* LaunchScreen.storyboard */; };
+		805814A521EE878400E6F889 /* ContactsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805814A421EE878400E6F889 /* ContactsListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		8058148821EE836100E6F889 /* Groopd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Groopd.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8058148B21EE836100E6F889 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8058148D21EE836100E6F889 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8058148D21EE836100E6F889 /* GroopdListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroopdListViewController.swift; sourceTree = "<group>"; };
 		8058149021EE836100E6F889 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8058149321EE836100E6F889 /* Groopd.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Groopd.xcdatamodel; sourceTree = "<group>"; };
 		8058149521EE836200E6F889 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8058149821EE836200E6F889 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8058149A21EE836200E6F889 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		805814A421EE878400E6F889 /* ContactsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,14 +59,47 @@
 			isa = PBXGroup;
 			children = (
 				8058148B21EE836100E6F889 /* AppDelegate.swift */,
-				8058148D21EE836100E6F889 /* ViewController.swift */,
-				8058148F21EE836100E6F889 /* Main.storyboard */,
-				8058149521EE836200E6F889 /* Assets.xcassets */,
-				8058149721EE836200E6F889 /* LaunchScreen.storyboard */,
+				805814A321EE846D00E6F889 /* Data Model */,
+				805814A021EE843100E6F889 /* Controller */,
+				805814A121EE844000E6F889 /* View */,
+				805814A221EE844D00E6F889 /* Supporting Files */,
 				8058149A21EE836200E6F889 /* Info.plist */,
-				8058149221EE836100E6F889 /* Groopd.xcdatamodeld */,
 			);
 			path = Groopd;
+			sourceTree = "<group>";
+		};
+		805814A021EE843100E6F889 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8058148D21EE836100E6F889 /* GroopdListViewController.swift */,
+				805814A421EE878400E6F889 /* ContactsListViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		805814A121EE844000E6F889 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8058148F21EE836100E6F889 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		805814A221EE844D00E6F889 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8058149521EE836200E6F889 /* Assets.xcassets */,
+				8058149721EE836200E6F889 /* LaunchScreen.storyboard */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		805814A321EE846D00E6F889 /* Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				8058149221EE836100E6F889 /* Groopd.xcdatamodeld */,
+			);
+			path = "Data Model";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,8 +173,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8058148E21EE836100E6F889 /* ViewController.swift in Sources */,
+				8058148E21EE836100E6F889 /* GroopdListViewController.swift in Sources */,
 				8058148C21EE836100E6F889 /* AppDelegate.swift in Sources */,
+				805814A521EE878400E6F889 /* ContactsListViewController.swift in Sources */,
 				8058149421EE836100E6F889 /* Groopd.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
