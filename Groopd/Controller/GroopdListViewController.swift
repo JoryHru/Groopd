@@ -41,6 +41,8 @@ class GroopdListViewController: UITableViewController {
     //MARK: Tableview Delegate Method
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        performSegue(withIdentifier: "GoToMessages", sender: self)
+        
     }
     
     //MARK: Add Button
