@@ -8,10 +8,15 @@
 
 import UIKit
 import CoreData
+import MessageUI
 
-class GroopdListViewController: UITableViewController {
+class GroopdListViewController: UITableViewController, MFMessageComposeViewControllerDelegate {
     
     var groopdsListArray = [NewGroopd]()
+    
+    var recipients: [String] = ["1234567890"]
+    
+    var message: String = "Message."
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
@@ -41,7 +46,7 @@ class GroopdListViewController: UITableViewController {
     //MARK: Tableview Delegate Method
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        performSegue(withIdentifier: "GoToMessages", sender: self)
+        displayMessageView()
         
     }
     
@@ -104,7 +109,41 @@ class GroopdListViewController: UITableViewController {
         
         tableView.reloadData()
     }
+    //MARK: Messages Delegate Method
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        
+        switch result.rawValue {
+        case MessageComposeResult.cancelled.rawValue:
+            print("Message Cancelled")
+            controller.dismiss(animated: true, completion: nil)
+        case MessageComposeResult.failed.rawValue:
+            print("Message Failed")
+            controller.dismiss(animated: true, completion: nil)
+        case MessageComposeResult.sent.rawValue:
+            print("Message Sent")
+            controller.dismiss(animated: true, completion: nil)
+        default:
+            break
+        }
+    }
     
+    //MARK: Messages Methods
+    func displayMessageView() {
+        let messagesVC = MFMessageComposeViewController()
+        messagesVC.messageComposeDelegate = self
+        
+        //configure view fields
+        messagesVC.recipients = recipients
+        messagesVC.body = message
+        
+        //present the view modally
+        if MFMessageComposeViewController.canSendText() {
+            self.present(messagesVC, animated: true, completion: nil)
+        } else {
+            print("Message cannot be sent")
+            
+        }
+    }
 
 }
 
