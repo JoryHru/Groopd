@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18C54" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="AddContact" representedClassName=".AddContact" syncable="YES" codeGenerationType="class">
+        <attribute name="recipientsName" attributeType="String" syncable="YES"/>
+        <attribute name="recipientsNumber" attributeType="String" syncable="YES"/>
+        <relationship name="parentGroopd" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NewGroopd" inverseName="contacts" inverseEntity="NewGroopd" syncable="YES"/>
+    </entity>
     <entity name="NewGroopd" representedClassName=".NewGroopd" syncable="YES" codeGenerationType="class">
         <attribute name="groopdName" attributeType="String" syncable="YES"/>
+        <attribute name="indexNumber" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="contacts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="AddContact" inverseName="parentGroopd" inverseEntity="AddContact" syncable="YES"/>
     </entity>
     <elements>
-        <element name="NewGroopd" positionX="-63" positionY="-18" width="128" height="60"/>
+        <element name="NewGroopd" positionX="-63" positionY="-18" width="128" height="88"/>
+        <element name="AddContact" positionX="103.859375" positionY="-14.19140625" width="128" height="88"/>
     </elements>
 </model>

@@ -22,6 +22,8 @@ class GroopdListViewController: UITableViewController, MFMessageComposeViewContr
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         // Do any additional setup after loading the view, typically from a nib.
         loadGroopds()
     }
@@ -42,6 +44,33 @@ class GroopdListViewController: UITableViewController, MFMessageComposeViewContr
         
         return cell
     }
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        
+        let movedCell = groopdsListArray[sourceIndexPath.row]
+        groopdsListArray.remove(at: sourceIndexPath.row)
+        groopdsListArray.insert(movedCell, at: destinationIndexPath.row)
+        
+        let newItem = NewGroopd(context: self.context)
+        newItem.indexNumber = Int16(destinationIndexPath.row)
+        
+        saveGroopds()
+        
+    }
+       
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
+            context.delete(groopdsListArray[indexPath.row])
+            groopdsListArray.remove(at: indexPath.row)
+            saveGroopds()
+        }
+    }
     
     //MARK: Tableview Delegate Method
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -50,7 +79,7 @@ class GroopdListViewController: UITableViewController, MFMessageComposeViewContr
         
     }
     
-    //MARK: Add Button
+    //MARK: Add/Edit Buttons
     @IBAction func addNewGroopdButtonPressed(_ sender: UIBarButtonItem) {
         
         var textField = UITextField()
@@ -79,6 +108,12 @@ class GroopdListViewController: UITableViewController, MFMessageComposeViewContr
         alert.addAction(action)
         
         present(alert, animated: true, completion: nil)
+        
+    }
+    
+    @IBAction func editGroopdButtonPressed(_ sender: UIBarButtonItem) {
+        
+        self.isEditing = !self.isEditing
         
     }
     
@@ -131,7 +166,6 @@ class GroopdListViewController: UITableViewController, MFMessageComposeViewContr
     func displayMessageView() {
         let messagesVC = MFMessageComposeViewController()
         messagesVC.messageComposeDelegate = self
-        
         //configure view fields
         messagesVC.recipients = recipients
         messagesVC.body = message
@@ -143,6 +177,11 @@ class GroopdListViewController: UITableViewController, MFMessageComposeViewContr
             print("Message cannot be sent")
             
         }
+    }
+    
+    @IBAction func goToContacts(_ sender: UIButton) {
+        
+        
     }
 
 }
