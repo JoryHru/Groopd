@@ -9,12 +9,13 @@
 import UIKit
 import CoreData
 import MessageUI
+import ContactsUI
 
 class GroopdListViewController: UITableViewController, MFMessageComposeViewControllerDelegate {
     
     var groopdsListArray = [NewGroopd]()
     
-    var recipients: [String] = ["1234567890"]
+    //var recipients: [String] = ["1234567890"]
     
     var message: String = "Message."
     
@@ -164,6 +165,31 @@ class GroopdListViewController: UITableViewController, MFMessageComposeViewContr
     
     //MARK: Messages Methods
     func displayMessageView() {
+        
+        var contactsArray = [AddContact]()
+        let request = NSFetchRequest<AddContact>(entityName: "AddContact")
+        
+        var recipients = [String]()
+        
+        do {
+            contactsArray = try context.fetch(request)
+            
+            if contactsArray.count > 0 {
+                let numberOfContacts = contactsArray.count - 1
+                for i in 0...numberOfContacts {
+                    let match = contactsArray[i]
+                    let recipientNumbers = match.value(forKey: "recipientsNumber") as! String
+                    
+                    print(recipientNumbers)
+                    
+                    recipients.append(recipientNumbers)
+                }
+            
+        }
+        } catch {
+            print(error)
+        }
+        
         let messagesVC = MFMessageComposeViewController()
         messagesVC.messageComposeDelegate = self
         //configure view fields

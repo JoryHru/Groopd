@@ -63,7 +63,7 @@ class ContactsListViewController: UITableViewController, CNContactPickerDelegate
         
         let newItem = AddContact(context: self.context)
         newItem.recipientsName = contact.givenName + " " + contact.familyName
-        newItem.recipientsNumber = "\(contact.phoneNumbers[0])"
+        newItem.recipientsNumber = (contact.phoneNumbers[0].value as CNPhoneNumber).stringValue
         contactsArray.append(newItem)
         saveContacts()
     }
