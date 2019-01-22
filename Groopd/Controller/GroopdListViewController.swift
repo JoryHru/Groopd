@@ -9,7 +9,6 @@
 import UIKit
 import CoreData
 import MessageUI
-import ContactsUI
 
 class GroopdListViewController: UITableViewController, MFMessageComposeViewControllerDelegate {
     
@@ -158,6 +157,12 @@ class GroopdListViewController: UITableViewController, MFMessageComposeViewContr
         case MessageComposeResult.sent.rawValue:
             print("Message Sent")
             controller.dismiss(animated: true, completion: nil)
+            let alert = UIAlertController(title: "Message Sent", message: "", preferredStyle: .alert)
+            present(alert, animated: true)
+            let when = DispatchTime.now() + 1
+            DispatchQueue.main.asyncAfter(deadline: when) {
+                alert.dismiss(animated: true, completion: nil)
+            }
         default:
             break
         }
