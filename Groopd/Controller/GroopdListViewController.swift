@@ -75,6 +75,7 @@ class GroopdListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let displayMessageVC = MessagesViewController()
+        displayMessageVC.selectedGroopd = groopdsListArray[indexPath.row]
         present(displayMessageVC, animated: true, completion: nil)
         
     }
@@ -109,6 +110,13 @@ class GroopdListViewController: UITableViewController {
         
         present(alert, animated: true, completion: nil)
         
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! ContactsListViewController
+        
+        destinationVC.selectedGroopd = groopdsListArray[groopdsListArray.count - 1]
+        print(groopdsListArray.count)
     }
     
     @IBAction func editGroopdButtonPressed(_ sender: UIBarButtonItem) {

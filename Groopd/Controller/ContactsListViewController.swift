@@ -64,6 +64,7 @@ class ContactsListViewController: UITableViewController, CNContactPickerDelegate
         let newItem = AddContact(context: self.context)
         newItem.recipientsName = contact.givenName + " " + contact.familyName
         newItem.recipientsNumber = (contact.phoneNumbers[0].value as CNPhoneNumber).stringValue
+        newItem.parentGroopd = selectedGroopd
         contactsArray.append(newItem)
         saveContacts()
     }
@@ -82,9 +83,15 @@ class ContactsListViewController: UITableViewController, CNContactPickerDelegate
         
     }
     
-    func loadContacts() {
+    func loadContacts(with request: NSFetchRequest<AddContact> = AddContact.fetchRequest(), predicate: NSPredicate? = nil) {
         
-        let request: NSFetchRequest<AddContact> = AddContact.fetchRequest()
+        let groopdPredicate = NSPredicate(format: "parentGroopd.groopdName MATCHES %@", selectedGroopd!.groopdName!)
+        
+        if let additionalPredicate = predicate {
+            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [groopdPredicate, additionalPredicate])
+        } else {
+            request.predicate = groopdPredicate
+        }
         
         do {
             contactsArray = try context.fetch(request)

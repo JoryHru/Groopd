@@ -20,10 +20,20 @@ class MessagesViewController: MFMessageComposeViewController, MFMessageComposeVi
     
     var newRecipients = [String]()
     
+    var selectedGroopd: NewGroopd? {
+        didSet {
+            fetchData()
+        }
+    }
     
     func fetchData() {
+        
+        let request2: NSFetchRequest<AddContact> = AddContact.fetchRequest()
+        let predicate = NSPredicate(format: "parentGroopd.groopdName MATCHES %@", selectedGroopd!.groopdName!)
+        request2.predicate = predicate
+        
         do {
-            contactsArray = try context.fetch(request)
+            contactsArray = try context.fetch(request2)
             
             if contactsArray.count > 0 {
                 let numberOfContacts = contactsArray.count - 1
@@ -49,7 +59,7 @@ class MessagesViewController: MFMessageComposeViewController, MFMessageComposeVi
         super.viewDidLoad()
         
         self.messageComposeDelegate = self
-        fetchData()
+        
         
     }
     
