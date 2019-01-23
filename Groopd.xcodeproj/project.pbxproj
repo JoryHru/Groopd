@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8005255921F7E4FA00768221 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8005255821F7E4FA00768221 /* MessagesViewController.swift */; };
 		8058148C21EE836100E6F889 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8058148B21EE836100E6F889 /* AppDelegate.swift */; };
 		8058148E21EE836100E6F889 /* GroopdListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8058148D21EE836100E6F889 /* GroopdListViewController.swift */; };
 		8058149121EE836100E6F889 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8058148F21EE836100E6F889 /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8005255821F7E4FA00768221 /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		8058148821EE836100E6F889 /* Groopd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Groopd.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8058148B21EE836100E6F889 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8058148D21EE836100E6F889 /* GroopdListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroopdListViewController.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 		805814A021EE843100E6F889 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				8005255821F7E4FA00768221 /* MessagesViewController.swift */,
 				8058148D21EE836100E6F889 /* GroopdListViewController.swift */,
 				805814A421EE878400E6F889 /* ContactsListViewController.swift */,
 			);
@@ -173,6 +176,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8005255921F7E4FA00768221 /* MessagesViewController.swift in Sources */,
 				8058148E21EE836100E6F889 /* GroopdListViewController.swift in Sources */,
 				8058148C21EE836100E6F889 /* AppDelegate.swift in Sources */,
 				805814A521EE878400E6F889 /* ContactsListViewController.swift in Sources */,

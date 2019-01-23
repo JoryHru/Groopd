@@ -8,9 +8,8 @@
 
 import UIKit
 import CoreData
-import MessageUI
 
-class GroopdListViewController: UITableViewController, MFMessageComposeViewControllerDelegate {
+class GroopdListViewController: UITableViewController {
     
     var groopdsListArray = [NewGroopd]()
     
@@ -75,7 +74,8 @@ class GroopdListViewController: UITableViewController, MFMessageComposeViewContr
     //MARK: Tableview Delegate Method
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        displayMessageView()
+        let displayMessageVC = MessagesViewController()
+        present(displayMessageVC, animated: true, completion: nil)
         
     }
     
@@ -144,71 +144,7 @@ class GroopdListViewController: UITableViewController, MFMessageComposeViewContr
         
         tableView.reloadData()
     }
-    //MARK: Messages Delegate Method
-    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
-        
-        switch result.rawValue {
-        case MessageComposeResult.cancelled.rawValue:
-            print("Message Cancelled")
-            controller.dismiss(animated: true, completion: nil)
-        case MessageComposeResult.failed.rawValue:
-            print("Message Failed")
-            controller.dismiss(animated: true, completion: nil)
-        case MessageComposeResult.sent.rawValue:
-            print("Message Sent")
-            controller.dismiss(animated: true, completion: nil)
-            let alert = UIAlertController(title: "Message Sent", message: "", preferredStyle: .alert)
-            present(alert, animated: true)
-            let when = DispatchTime.now() + 1
-            DispatchQueue.main.asyncAfter(deadline: when) {
-                alert.dismiss(animated: true, completion: nil)
-            }
-        default:
-            break
-        }
-    }
     
-    //MARK: Messages Methods
-    func displayMessageView() {
-        
-        var contactsArray = [AddContact]()
-        let request = NSFetchRequest<AddContact>(entityName: "AddContact")
-        
-        var recipients = [String]()
-        
-        do {
-            contactsArray = try context.fetch(request)
-            
-            if contactsArray.count > 0 {
-                let numberOfContacts = contactsArray.count - 1
-                for i in 0...numberOfContacts {
-                    let match = contactsArray[i]
-                    let recipientNumbers = match.value(forKey: "recipientsNumber") as! String
-                    
-                    print(recipientNumbers)
-                    
-                    recipients.append(recipientNumbers)
-                }
-            
-        }
-        } catch {
-            print(error)
-        }
-        
-        let messagesVC = MFMessageComposeViewController()
-        messagesVC.messageComposeDelegate = self
-        //configure view fields
-        messagesVC.recipients = recipients
-        messagesVC.body = message
-        
-        //present the view modally
-        if MFMessageComposeViewController.canSendText() {
-            self.present(messagesVC, animated: true, completion: nil)
-        } else {
-            print("Message cannot be sent")
-            
-        }
-    }
     
     @IBAction func goToContacts(_ sender: UIButton) {
         
