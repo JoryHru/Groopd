@@ -43,6 +43,17 @@ class ContactsListViewController: UITableViewController, CNContactPickerDelegate
         
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
+            context.delete(contactsArray[indexPath.row])
+            contactsArray.remove(at: indexPath.row)
+            saveContacts()
+        }
+    }
 
     //MARK: Tableview Delegate Method
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -83,15 +94,11 @@ class ContactsListViewController: UITableViewController, CNContactPickerDelegate
         
     }
     
-    func loadContacts(with request: NSFetchRequest<AddContact> = AddContact.fetchRequest(), predicate: NSPredicate? = nil) {
+    func loadContacts() {
         
-        let groopdPredicate = NSPredicate(format: "parentGroopd.groopdName MATCHES %@", selectedGroopd!.groopdName!)
-        
-        if let additionalPredicate = predicate {
-            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [groopdPredicate, additionalPredicate])
-        } else {
-            request.predicate = groopdPredicate
-        }
+        let request: NSFetchRequest<AddContact> = AddContact.fetchRequest()
+        let predicate = NSPredicate(format: "parentGroopd.groopdName MATCHES %@", selectedGroopd!.groopdName!)
+        request.predicate = predicate
         
         do {
             contactsArray = try context.fetch(request)

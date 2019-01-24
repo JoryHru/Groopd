@@ -17,18 +17,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <button key="tableHeaderView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="TPO-ZJ-H7c">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Button"/>
-                            <connections>
-                                <action selector="goToContacts:" destination="wK0-Nf-xWJ" eventType="touchUpInside" id="bq5-fx-2UA"/>
-                                <segue destination="9y0-sA-1aP" kind="show" id="OHy-fG-dw5"/>
-                            </connections>
-                        </button>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GroopdCell" id="Enw-pO-8yY">
-                                <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GroopdCell" editingAccessoryType="detailDisclosureButton" id="Enw-pO-8yY">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Enw-pO-8yY" id="0JN-B8-Svi">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -47,7 +38,7 @@
                                 <action selector="editGroopdButtonPressed:" destination="wK0-Nf-xWJ" id="gpW-sV-Kuh"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Jax-3r-PrP">
+                        <barButtonItem key="rightBarButtonItem" title="Create Groopd" id="Jax-3r-PrP">
                             <connections>
                                 <action selector="addNewGroopdButtonPressed:" destination="wK0-Nf-xWJ" id="rGE-CP-D2X"/>
                             </connections>
@@ -55,6 +46,7 @@
                     </navigationItem>
                     <connections>
                         <segue destination="9y0-sA-1aP" kind="show" identifier="GoToContactsList" id="Mwl-9C-TSw"/>
+                        <segue destination="9y0-sA-1aP" kind="show" identifier="GoToSpecificGroopdContacts" id="4SW-Mf-xrD"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0rh-PL-VIl" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -120,6 +112,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="OHy-fG-dw5"/>
+        <segue reference="4SW-Mf-xrD"/>
     </inferredMetricsTieBreakers>
 </document>

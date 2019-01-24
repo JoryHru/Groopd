@@ -11,12 +11,9 @@ import CoreData
 
 class MessagesViewController: MFMessageComposeViewController, MFMessageComposeViewControllerDelegate {
     
-    var message: String = "Message."
-    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     var contactsArray = [AddContact]()
-    let request = NSFetchRequest<AddContact>(entityName: "AddContact")
     
     var newRecipients = [String]()
     
@@ -28,12 +25,12 @@ class MessagesViewController: MFMessageComposeViewController, MFMessageComposeVi
     
     func fetchData() {
         
-        let request2: NSFetchRequest<AddContact> = AddContact.fetchRequest()
+        let request: NSFetchRequest<AddContact> = AddContact.fetchRequest()
         let predicate = NSPredicate(format: "parentGroopd.groopdName MATCHES %@", selectedGroopd!.groopdName!)
-        request2.predicate = predicate
+        request.predicate = predicate
         
         do {
-            contactsArray = try context.fetch(request2)
+            contactsArray = try context.fetch(request)
             
             if contactsArray.count > 0 {
                 let numberOfContacts = contactsArray.count - 1
@@ -50,7 +47,7 @@ class MessagesViewController: MFMessageComposeViewController, MFMessageComposeVi
         } catch {
             print(error)
         }
-        body = "hello"
+        body = ""
         recipients = newRecipients
     }
     
@@ -65,21 +62,21 @@ class MessagesViewController: MFMessageComposeViewController, MFMessageComposeVi
     
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
         
-        switch result.rawValue {
-        case MessageComposeResult.cancelled.rawValue:
+        switch result {
+        case .cancelled:
             print("Message Cancelled")
             controller.dismiss(animated: true, completion: nil)
-        case MessageComposeResult.failed.rawValue:
+        case .failed:
             print("Message Failed")
             controller.dismiss(animated: true, completion: nil)
-        case MessageComposeResult.sent.rawValue:
+        case .sent:
             print("Message Sent")
-            controller.dismiss(animated: true, completion: nil)
             let alert = UIAlertController(title: "Message Sent", message: "", preferredStyle: .alert)
             present(alert, animated: true)
             let when = DispatchTime.now() + 1
             DispatchQueue.main.asyncAfter(deadline: when) {
                 alert.dismiss(animated: true, completion: nil)
+                controller.dismiss(animated: true, completion: nil)
             }
         default:
             break

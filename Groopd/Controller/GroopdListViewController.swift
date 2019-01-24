@@ -12,10 +12,7 @@ import CoreData
 class GroopdListViewController: UITableViewController {
     
     var groopdsListArray = [NewGroopd]()
-    
-    //var recipients: [String] = ["1234567890"]
-    
-    var message: String = "Message."
+    var newindexpath: IndexPath = IndexPath()
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
@@ -43,22 +40,6 @@ class GroopdListViewController: UITableViewController {
         
         return cell
     }
-    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        
-        let movedCell = groopdsListArray[sourceIndexPath.row]
-        groopdsListArray.remove(at: sourceIndexPath.row)
-        groopdsListArray.insert(movedCell, at: destinationIndexPath.row)
-        
-        let newItem = NewGroopd(context: self.context)
-        newItem.indexNumber = Int16(destinationIndexPath.row)
-        
-        saveGroopds()
-        
-    }
-       
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
@@ -69,6 +50,10 @@ class GroopdListViewController: UITableViewController {
             groopdsListArray.remove(at: indexPath.row)
             saveGroopds()
         }
+    }
+    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        newindexpath = indexPath
+        performSegue(withIdentifier: "GoToSpecificGroopdContacts", sender: self)
     }
     
     //MARK: Tableview Delegate Method
@@ -113,10 +98,25 @@ class GroopdListViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destinationVC = segue.destination as! ContactsListViewController
         
-        destinationVC.selectedGroopd = groopdsListArray[groopdsListArray.count - 1]
-        print(groopdsListArray.count)
+        if segue.identifier == "GoToContactsList" {
+            
+            let destinationVC = segue.destination as! ContactsListViewController
+            destinationVC.selectedGroopd = groopdsListArray[groopdsListArray.count - 1]
+            print(groopdsListArray.count)
+            
+        }
+        else if segue.identifier == "GoToSpecificGroopdContacts" {
+            
+            let destinationVC = segue.destination as! ContactsListViewController
+            
+            
+                print("hhhh")
+                destinationVC.selectedGroopd = groopdsListArray[newindexpath.row]
+                print(groopdsListArray[newindexpath.row])
+            
+        }
+        
     }
     
     @IBAction func editGroopdButtonPressed(_ sender: UIBarButtonItem) {
@@ -151,12 +151,6 @@ class GroopdListViewController: UITableViewController {
         }
         
         tableView.reloadData()
-    }
-    
-    
-    @IBAction func goToContacts(_ sender: UIButton) {
-        
-        
     }
 
 }
